@@ -1,0 +1,19 @@
+{% extends 'todolist.html' %}
+
+{% block navbutton %}
+    <a href="{% url 'todo_list' %}"><button type="button">← Back to homepage</button></a>
+{% endblock %}
+
+{% block title %}Update Task{% endblock %}
+
+{% block form %}
+<form action="{% url 'task' id %}" method="POST">
+    {% csrf_token %}
+    {{ update_form }}
+    <input type="submit" name="update" value="Update" />
+    <input type="submit" name="delete" value="Delete" />
+    <input type="submit" name="complete" value="Mark Complete" />
+</form>
+{% endblock %}
+{% block content %}
+{% endblock %}

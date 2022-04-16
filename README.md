@@ -7,7 +7,8 @@
 ## About
 
 This is a simeple todo app undertaken for the purpose of learning the Django framework hands-on without having to attend to frant-end matters. The project was completed in two phases:
-- Phase 1: Completion of elements that allow the user to keep a list of tasks to do and mark them as complete or update or delete them.
+1. Phase 1: Completion of elements that allow the user to keep a list of tasks to do and mark them as complete or update or delete them. It also allows the user to navigate to a notes page in which notes can be created and deleted.
+2. Phase 2: Completion of elements that allow the users to add and remove tags to any task, so the logics for one-to-many and many-to-many relationships of database data would have to be implemented on the backend.
 
 The project fulfills a project requirement for the Columbia University's Justice Through Code, Spring 2022 program. Participants of JTC undergo an intensive of Python programming and app development using the Django framework. This is the fourth of the Django projects that will have been completed before the final project and before participants move on to the career development phase of the program.
 

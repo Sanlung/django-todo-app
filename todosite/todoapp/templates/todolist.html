@@ -6,13 +6,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Todo App</title>
     </head>
-    <body>
-        <h4>
-            {% block navbutton %}<a href="{% url 'notes' %}"><button type="button">To notes page →</button></a>{% endblock %}
-        </h4>
+    <body style="font-family: sans-serif">
+        {% block navbutton %}
+            <a href="{% url 'notes' %}"><button type="button">Notes →</button></a>
+        {% endblock %}
+
         <h1>
             {% block title %}Tasks{% endblock %}
         </h1>
+
         {% block form %}
         <form action="{% url 'todo_list' %}" method="POST">
             {% csrf_token %}
@@ -20,20 +22,25 @@
             <input type="submit" name="create" value="Create" />
         </form>
         {% endblock %}
+
         {% block content %}
+        <hr/>
         <h3>To Do:</h3>
-        <ul>
+
+        <ul style="list-style-type: '\1F535'">
             {% for pending_task in pending_tasks %}
             <li>
-                <a href="{% url 'task' pending_task.id %}">{{ pending_task.description }}</a>
+                <a href="{% url 'task' pending_task.id %}" style="text-decoration: none">&nbsp;{{ pending_task.description }}</a>
             </li>
             {% endfor %}
         </ul>
+
         <h3>Complete:</h3>
-        <ul>
+
+        <ul style="list-style-type: '\2705'">
             {% for completed_task in completed_tasks %}
             <li>
-                <a href="{% url 'task' completed_task.id %}">{{ completed_task.description }}</a>
+                <a href="{% url 'task' completed_task.id %}" style="text-decoration: none">&nbsp;{{ completed_task.description }}</a>
             </li>
             {% endfor %}
         </ul>

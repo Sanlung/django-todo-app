@@ -1,19 +1,64 @@
 {% extends 'todolist.html' %}
 
 {% block navbutton %}
-    <a href="{% url 'todo_list' %}"><button type="button">← Back to homepage</button></a>
+    <a href="{% url 'todo_list' %}"
+    ><button type="button">← Home</button></a>
 {% endblock %}
 
-{% block title %}Update Task{% endblock %}
+{% block title %}Task{% endblock %}
 
 {% block form %}
-<form action="{% url 'task' id %}" method="POST">
-    {% csrf_token %}
-    {{ update_form }}
-    <input type="submit" name="update" value="Update" />
-    <input type="submit" name="delete" value="Delete" />
-    <input type="submit" name="complete" value="Mark Complete" />
-</form>
+    <form action="{% url 'task' task.id %}" method="POST">
+        {% csrf_token %}
+        {{ update_form }}
+        <input type="submit" name="update" value="Update" />
+        <input type="submit" name="delete" value="Delete" />
+        <input type="submit" name="complete" value="Complete" />
+    </form>
 {% endblock %}
+
 {% block content %}
+    <h4>&#10148; {{task.description}} </h4>
+
+    <ul style="list-style: none">
+        {% for tag in tags %}
+        <li style="display: inline-block; padding: 0 5px; background: rgb(235, 235, 235)">
+            <a href="#" onclick="(({{event}}) =>
+            document.getElementById('tag').children[2].value = event.target.innerText
+            )()" style="text-decoration: none">{{ tag.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <form id="tag" action="{% url 'task' task.id %}" method="POST">
+        {% csrf_token %}
+        {{ tag_form }}
+        <input type="submit" name="tag" value="Add" />
+        <input type="submit" name="untag" value="Remvoe" />
+    </form>
+
+    <hr/>
+
+    <h3>Comments</h3>
+
+    <form id="comment" action="{% url 'task' task.id %}" method="POST">
+        {% csrf_token %}
+        {{ comment_form }}
+        <input type="submit" name="comment" value="Add" />
+        <input type="submit" name="remove" value="Remove" />
+    </form>
+
+    {% if comments %}
+    <h3>Click a comment and click Remove to remove:</h3>
+    {% endif %}
+
+    <ul style="list-style-type: '\1F535'">
+        {% for comment in comments %}
+        <li>
+            <a href="#" onclick="(({{event}}) =>
+            document.getElementById('comment').children[1].value = event.target.innerText.trim()
+            )()" style="text-decoration: none">&nbsp;{{ comment.content }}</a>
+        </li>
+        {% endfor %}
+    </ul>
 {% endblock %}

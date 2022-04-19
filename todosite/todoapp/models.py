@@ -21,7 +21,7 @@ class Note(models.Model):
 
 class Comment(models.Model):
     content = models.TextField()
-    create_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
     def __str__(self):
